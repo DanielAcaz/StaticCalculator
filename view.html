@@ -32,39 +32,39 @@
 		  background: #A0522D;
 		  width: 10px;
 		  height: 200px;
-		  left: 330px;
+		  left: 360px;
 		  transform: rotate(0deg);
 		  transform-origin: 0% 0%
 		}
 
 		.caixa {
-		  position: absolute;
-		  background: #FFDEAD;
-		  width: 400px;
-		  height: 200px;
-		  bottom: -200px;
-		  right: -360px
+			position: absolute;
+			background: #FFDEAD;
+			width: 398px;
+			height: 200px;
+			bottom: 390;
+			right: 520px;
 		}
 
 		.data {
 			position: absolute;
-			bottom: -400px;
+			bottom: 0px;
 			width: 500px;
 		}
 
 		#result{
 		    position: relative;
-			left: 20%;
-			top: 40%;
+			left: 0px;
+			top: 280px;
 		}
 	</style>
 </head>
 <body>
 	<div class="base">
-	    <div class="barra1"/>
-	    <div class="barra2"/>
+	    <div class="barra1"></div>
+	    <div class="barra2"></div>
 	</div> 
-	<div class="caixa"/>
+	<div class="caixa"></div>
 	<label id="result">Massa da Caixa = *Não Calculada</label>
 	<div class = "data">
 		<form>
@@ -85,11 +85,38 @@
 	</div>
 	<script type="text/javascript">
 		function calculateMass() {
-			var anguloBarraA = document.getElementById('barAngle1')
-			var anguloBarraB = document.getElementById('barAngle2')
+			var anguloBarraA = - (90 - parseInt(document.getElementById('barAngle1').value));
+			console.log(anguloBarraA);
+			var anguloBarraB = 90 - parseInt(document.getElementById('barAngle2').value);
+			console.log(anguloBarraB);
+
+
+			var anguloTotal = anguloBarraA + anguloBarraB;
+			if(anguloBarraA<anguloBarraB) {
+				anguloTotal *= -1;
+			}
+			console.log(anguloTotal);
+			var rotacaoCaixa = anguloTotal * 0.334;
+			var proporcaoEsquerdaCaixa = (anguloBarraA/anguloTotal) * 100;	
+			console.log(proporcaoEsquerdaCaixa)
+			var proporcaoDireitaCaixa = (anguloBarraB/anguloTotal) * 100;
+			console.log(proporcaoDireitaCaixa)
+
+			var barraA = document.getElementsByClassName('barra1')[0];
+			barraA.style.transform = 'rotate(' + anguloBarraA + 'deg)';
+
+			var barraB = document.getElementsByClassName('barra2')[0];
+			barraB.style.transform = 'rotate(' + anguloBarraB + 'deg)';
+
+			var caixa = document.getElementsByClassName('caixa')[0];
+			caixa.style.transform = 'rotate(' + rotacaoCaixa + 'deg)';
+			console.log(proporcaoEsquerdaCaixa + '% ' + proporcaoDireitaCaixa + '%');
+			//caixa.style.transform-origin = proporcaoEsquerdaCaixa + '% ' + proporcaoDireitaCaixa + '%'; 
+
+
 	  		var massaCaixa = document.getElementById('massa');
 	  		var forcaEstatica = document.getElementById('result');
-	  		forcaEstatica.textContent = "Massa da Caixa = " + (anguloBarraA.value * anguloBarraB.value * massaCaixa.value); 
+	  		forcaEstatica.textContent = "Massa da Caixa = " + (anguloBarraA * anguloBarraB * massaCaixa.value); 
 	  }
 	</script>
 </body>	
