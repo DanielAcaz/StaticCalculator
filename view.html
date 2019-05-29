@@ -88,17 +88,22 @@
 		function calculateMass() {
 			console.log("Iniciando Cálculo");
 			var anguloBarraA = parseInt(document.getElementById('barAngle1').value);
-			console.log(anguloBarraA);
 			var anguloBarraB = parseInt(document.getElementById('barAngle2').value);
-			console.log(anguloBarraB);
-
-			
+			var radianoBaraA = anguloBarraA*Math.PI / 180;
+			var radianoBaraB = anguloBarraB*Math.PI / 180;
+			console.log("cossenos:")
+			console.log(Math.cos(radianoBaraA))
+			console.log(Math.cos(radianoBaraB))
+			console.log(Math.cos(radianoBaraB)/Math.cos(radianoBaraA))
+			console.log("senos:")
+			console.log(Math.sin(radianoBaraA))
+			console.log(Math.sin(radianoBaraB))
 
 	  		var massaCaixa = document.getElementById('massa').value;
 	  		var forcaEstatica = document.getElementById('result');
 
-  			var forca2 = massaCaixa/(Math.cos(anguloBarraB)/Math.cos(anguloBarraA) + Math.sin(anguloBarraB));
-  			var forca1 = (forca2*Math.cos(anguloBarraB))/Math.cos(anguloBarraA)
+  			var forca2 = massaCaixa/((Math.cos(radianoBaraB)/Math.cos(radianoBaraA))*Math.sin(radianoBaraA) + Math.sin(radianoBaraB));
+  			var forca1 = (forca2*Math.cos(radianoBaraB))/Math.cos(radianoBaraA)
 
 	  		forcaEstatica.textContent = "Força 1 = " + forca1.toFixed(2) + " e " + "Forca2 = " + forca2.toFixed(2); 
 	  }
