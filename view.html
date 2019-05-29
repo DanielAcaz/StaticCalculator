@@ -65,7 +65,7 @@
 	    <div class="barra2"></div>
 	</div> 
 	<div class="caixa"></div>
-	<label id="result">Massa da Caixa = *Não Calculada</label>
+	<label id="result">Forças ainda não foram calculadas</label>
 	<div class = "data">
 		<form>
 		  <div class="form-group">
@@ -84,39 +84,23 @@
 		</form>
 	</div>
 	<script type="text/javascript">
+		
 		function calculateMass() {
-			var anguloBarraA = - (90 - parseInt(document.getElementById('barAngle1').value));
+			console.log("Iniciando Cálculo");
+			var anguloBarraA = parseInt(document.getElementById('barAngle1').value);
 			console.log(anguloBarraA);
-			var anguloBarraB = 90 - parseInt(document.getElementById('barAngle2').value);
+			var anguloBarraB = parseInt(document.getElementById('barAngle2').value);
 			console.log(anguloBarraB);
 
+			
 
-			var anguloTotal = anguloBarraA + anguloBarraB;
-			if(anguloBarraA<anguloBarraB) {
-				anguloTotal *= -1;
-			}
-			console.log(anguloTotal);
-			var rotacaoCaixa = anguloTotal * 0.334;
-			var proporcaoEsquerdaCaixa = (anguloBarraA/anguloTotal) * 100;	
-			console.log(proporcaoEsquerdaCaixa)
-			var proporcaoDireitaCaixa = (anguloBarraB/anguloTotal) * 100;
-			console.log(proporcaoDireitaCaixa)
-
-			var barraA = document.getElementsByClassName('barra1')[0];
-			barraA.style.transform = 'rotate(' + anguloBarraA + 'deg)';
-
-			var barraB = document.getElementsByClassName('barra2')[0];
-			barraB.style.transform = 'rotate(' + anguloBarraB + 'deg)';
-
-			var caixa = document.getElementsByClassName('caixa')[0];
-			caixa.style.transform = 'rotate(' + rotacaoCaixa + 'deg)';
-			console.log(proporcaoEsquerdaCaixa + '% ' + proporcaoDireitaCaixa + '%');
-			//caixa.style.transform-origin = proporcaoEsquerdaCaixa + '% ' + proporcaoDireitaCaixa + '%'; 
-
-
-	  		var massaCaixa = document.getElementById('massa');
+	  		var massaCaixa = document.getElementById('massa').value;
 	  		var forcaEstatica = document.getElementById('result');
-	  		forcaEstatica.textContent = "Massa da Caixa = " + (anguloBarraA * anguloBarraB * massaCaixa.value); 
+
+  			var forca2 = massaCaixa/(Math.cos(anguloBarraB)/Math.cos(anguloBarraA) + Math.sin(anguloBarraB));
+  			var forca1 = (forca2*Math.cos(anguloBarraB))/Math.cos(anguloBarraA)
+
+	  		forcaEstatica.textContent = "Força 1 = " + forca1.toFixed(2) + " e " + "Forca2 = " + forca2.toFixed(2); 
 	  }
 	</script>
 </body>	
